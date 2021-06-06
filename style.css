@@ -19,6 +19,7 @@ body {
 
 .calculator-body {
   padding: 10px 8px;
+  background-color: #eee;
   border: solid 1px #eee;
   border-radius: 10px;
   display: flex;
@@ -29,7 +30,9 @@ body {
 
 .calculator-screen {
   background: #eee;
+  border: #8a8a8a solid 1px;
   padding: 2px 4px;
+  margin-bottom: 1rem;
   width: 90%;
   height: 1em;
   border-radius: 2px;
@@ -43,19 +46,24 @@ body {
 
 .calculator-buttons {
   display: flex;
-  color: #fff;
+  margin-bottom: 1rem;
 }
 
 .button {
   background: #555;
+  border: #8a8a8a solid 1px;
+  color: #fff;
   padding: 3px 7px;
   display: inline-block;
+  margin: 4px;
+  width: 45px;
 }
 
 .calculator-left {
   display: flex;
   flex-direction: column;
-  flex: 4;
+  justify-content: center;
+  align-items: center;
 }
 
 .calculator-right {

@@ -27,6 +27,7 @@ const numberButtons = document.querySelectorAll(`.number-button`)
 const operationButtons = document.querySelectorAll(`.operation-button`)
 const clearButton = document.querySelector(`.clear-button`)
 const declareButton = document.querySelector(`.declare-button`)
+const backButton = document.querySelector(`.back-button`)
 const calculatorScreen = document.querySelector(`.calculator-screen`)
 
 let currentInput = ''
@@ -36,6 +37,10 @@ let operationArray = [];
 for (let i = 0; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener('click', e => {
         const inputStr = e.target.textContent
+        if (inputStr === '.') {
+            checkPeriod();
+            return
+        }
         currentInput += inputStr
         calculatorScreen.textContent = currentInput;
     })
@@ -44,7 +49,6 @@ for (let i = 0; i < numberButtons.length; i++) {
 for (let i = 0; i < operationButtons.length; i++) {
     operationButtons[i].addEventListener('click', e => {
         const inputStr = e.target.textContent
-        if (inputStr === '.') checkPeriod();
         operationArrayHandler(inputStr)
     })
 }
@@ -55,10 +59,11 @@ function currentInputHandler() {
 }
 
 function checkPeriod() {
-    if (currentInput.indexOf('.')){
+    if (currentInput.includes('.') || currentInput === ''){
         return
     }
     currentInput += '.'
+    calculatorScreen.textContent = currentInput;
 }
 
 function clearInput() {
@@ -110,16 +115,23 @@ function calculate() {
         return product
     }, 0)
     clearInputs()
-    calculatorScreen.textContent = calculation
+    calculatorScreen.textContent = Math.floor(calculation * 100) / 100
 }
 
 clearButton.addEventListener('click', clearInputs)
+
+backButton.addEventListener('click', () => {
+    if (currentInput) {
+        currentInput = currentInput.slice(0, -1)
+        calculatorScreen.textContent = currentInput;
+    }
+})
 
 function clearInputs() {
     currentInput = ''
     numberArray = []
     operationArray = []
-    calculatorScreen.textContent = '|';
+    calculatorScreen.textContent = '';
 }
 
 declareButton.addEventListener('click', () => {
